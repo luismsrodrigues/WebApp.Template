@@ -1,9 +1,10 @@
 import express, { Application } from 'express';
 import path from 'path';
 import dotenv from "dotenv";
-import { TestController } from "./controllers/test.controller";
+import Controllers from "./controllers";
 
 dotenv.config();
+
 const PUBLIC_URL: string = process.env.PUBLIC_URL || '';
 const PORT: string = process.env.API_PORT || '3000';
 const isProduction : boolean = process.env.ENV != "development";
@@ -17,8 +18,10 @@ app.get("/api/test", (_, response) =>{
   response.json({test: Date.now()});
 });
 
-const t = new TestController();
-console.log(t.BasePath);
+Controllers.forEach(controller => {
+  const t = new controller;
+  t.Map(app)
+});
 
 if(isProduction){
   app.use(
@@ -40,7 +43,7 @@ app.listen(PORT, () => {
       0x1f680
     )}`
   );
-  let mode = isProduction ? "Production" : "Development";
+  const mode = isProduction ? "Production" : "Development";
   console.log("Started in "+ mode + " Mode");
 });
 
