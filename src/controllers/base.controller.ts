@@ -1,9 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { Router, Application } from "express";
+import { Router, Application, Request, Response } from "express";
 import { AuthorizeHandler } from "@/utils/handlers";
 
 type HttpVerb = "GET" | "POST" | "PUT" | "DELETE";
+
+export {
+    Request,
+    Response
+};
 
 export interface IRouter {
     Path: string,
