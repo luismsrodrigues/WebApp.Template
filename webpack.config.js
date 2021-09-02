@@ -1,8 +1,9 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-const basePath = path.resolve(__dirname, "..");
-require('dotenv').config();
+const basePath = path.resolve(__dirname);
+const dotenv = require('dotenv');
+dotenv.config();
 
 const _apiPort = process.env.API_PORT || 3000;
 const _clientPort = process.env.CLIENT_PORT || 3001;
@@ -40,7 +41,7 @@ module.exports = {
         })
     ],
     output: {
-        path: path.join(__dirname, '..' ,'build', "www"),
+        path: path.join(basePath, 'build', "www"),
         filename: 'bundle.js',
         publicPath: '/',
         clean: true

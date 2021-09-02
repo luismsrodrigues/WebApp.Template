@@ -21,11 +21,19 @@
     "moduleResolution": "node",
     "removeComments": true,
     "esModuleInterop": true,
+    "experimentalDecorators": true,
     "typeRoots": [
       "node_modules/@types"
     ],
+    "paths": { 
+      "@/utils/*": ["./src/utils/*"], 
+    }
   },
   "include": [
     "src"
+  ],
+  "exclude": [
+    "./node_modules/**/*",
+    "./config"
   ]
 }

@@ -2,6 +2,7 @@
     "compilerOptions": {
         "module": "commonjs",
         "target": "es2019",
+        "baseUrl": ".",
         "moduleResolution": "node",
         "esModuleInterop": true,
         "downlevelIteration": true,
@@ -14,12 +15,17 @@
         "strict": false,
         "alwaysStrict": false,
         "noImplicitAny": false,
+        "experimentalDecorators": true,
         "typeRoots": [
             "node_modules/@types/"
-        ]
+        ],
+        "paths": { 
+            "@/utils/*": ["./src/utils/*"], 
+        }
     },
     "exclude": [
-        "./src/client"
+        "./src/client",
+        "./config"
     ],
     "include": [
         "./src"
