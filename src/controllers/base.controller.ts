@@ -31,33 +31,41 @@ export abstract class BaseController {
                         router.Path,
                         this.ApplyMiddleware(router.Callback),
                         // @ts-ignore
-                        (request, response, next) => this[router.Callback](this, request, response, next));
+                        (request, response, next) => this.ErrorHandler(router, request, response, next));
                     break;
                 case "POST":
                     _router.post(
                         router.Path,
                         this.ApplyMiddleware(router.Callback),
                         // @ts-ignore
-                        (request, response, next) => this[router.Callback](this, request, response, next));
+                        (request, response, next) => this.ErrorHandler(router, request, response, next));
                     break;
                 case "PUT":
                     _router.put(
                         router.Path,
                         this.ApplyMiddleware(router.Callback),
                         // @ts-ignore
-                        (request, response, next) => this[router.Callback](this, request, response, next));
+                        (request, response, next) => this.ErrorHandler(router, request, response, next));
                     break;
                 case "DELETE":
                     _router.delete(
                         router.Path,
                         this.ApplyMiddleware(router.Callback),
                         // @ts-ignore
-                        (request, response, next) => this[router.Callback](this, request, response, next));
+                        (request, response, next) => this.ErrorHandler(router, request, response, next));
                     break;
             }
         });
 
         app.use(this.BasePath, _router);
+    }
+
+    private async ErrorHandler(router: IRouter, request, response, next) {
+        try {
+            await this[router.Callback](this, request, response, next);
+        } catch (error) {
+            next(error);
+        }
     }
 
     private ApplyMiddleware(method: string): any[] {

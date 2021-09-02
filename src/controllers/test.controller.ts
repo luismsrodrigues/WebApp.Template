@@ -4,7 +4,6 @@ import { Request, Response } from "express";
 
 @Controller('/test')
 export class TestController extends BaseController {
-  private varTest = 'asd';
 
   @Get("/123")
   public TestMethod($: this, request: Request, response: Response): void {
@@ -18,7 +17,8 @@ export class TestController extends BaseController {
   }
 
   @Get("/2")
-  public Method2($: this, request: Request, response: Response): void {
+  public Method2($: this, request: Request, response: Response, next): void {
+    throw new Error("Aconteceu alguma coisa nesta altura e isto arrebentou!");
     response.json({ Test: $.BasePath, ts: Date.now() });
   }
 }

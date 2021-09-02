@@ -3,6 +3,7 @@ import express from "express";
 import path from 'path';
 import dotenv from "dotenv";
 import Controllers from "./controllers";
+import { ErrorHandler } from "@/utils/handlers";
 
 dotenv.config();
 
@@ -15,14 +16,12 @@ const app: Application = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/api/test", (_, response) => {
-  response.json({ test: Date.now() });
-});
-
 Controllers.forEach(controller => {
   const t = new controller;
   t.Map(app);
 });
+
+app.use(ErrorHandler);
 
 if (isProduction) {
   app.use(
