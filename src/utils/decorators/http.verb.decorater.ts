@@ -1,4 +1,4 @@
-import { BaseController, IRouter } from "../../controllers/base.controller";
+import { BaseController } from "../../controllers/base.controller";
 
 export function Get(route: string) {
     return function (target: BaseController, propertyKey: string, descriptor: PropertyDescriptor) {
@@ -14,17 +14,44 @@ export function Get(route: string) {
     };
 }
 
-export function Post(constructor: Function) {
-    Object.seal(constructor);
-    Object.seal(constructor.prototype);
+export function Post(route: string) {
+    return function (target: BaseController, propertyKey: string, descriptor: PropertyDescriptor) {
+        if(!target.Routes){
+            target.Routes = [];
+        }
+
+        target.Routes.push({
+            Path: route,
+            Callback: propertyKey,
+            Method: "POST"
+        });
+    };
 }
 
-export function Delete(constructor: Function) {
-    Object.seal(constructor);
-    Object.seal(constructor.prototype);
+export function Delete(route: string) {
+    return function (target: BaseController, propertyKey: string, descriptor: PropertyDescriptor) {
+        if(!target.Routes){
+            target.Routes = [];
+        }
+
+        target.Routes.push({
+            Path: route,
+            Callback: propertyKey,
+            Method: "DELETE"
+        });
+    };
 }
 
-export function Put(constructor: Function) {
-    Object.seal(constructor);
-    Object.seal(constructor.prototype);
+export function Put(route: string) {
+    return function (target: BaseController, propertyKey: string, descriptor: PropertyDescriptor) {
+        if(!target.Routes){
+            target.Routes = [];
+        }
+
+        target.Routes.push({
+            Path: route,
+            Callback: propertyKey,
+            Method: "PUT"
+        });
+    };
 }
