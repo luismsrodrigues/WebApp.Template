@@ -11,7 +11,12 @@ module.exports = {
     clean: true
   },
   resolve: {
-    extensions: ['.ts', '.js']
+    extensions: ['.ts', '.js'],
+    plugins: [
+      new TsconfigPathsPlugin({
+        configFile: "./tsconfig.server.json"
+      })
+    ]
   },
   module: {
     rules: [
@@ -31,11 +36,6 @@ module.exports = {
   plugins: [
     new CopyPlugin({
       patterns: [{ from: '.env.prod', to: './' }]
-    }),
-    new TsconfigPathsPlugin({
-      configFile: "tsconfig.server.json",
-      logLevel: "info",
-      extensions: [".ts", ".tsx"],
     })
   ]
 };

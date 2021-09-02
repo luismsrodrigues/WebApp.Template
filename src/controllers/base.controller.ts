@@ -2,6 +2,7 @@
 import { Router, Application } from "express";
 
 type HttpVerb = "GET" | "POST" | "PUT" | "DELETE";
+
 export interface IRouter {
     Path: string,
     Method: HttpVerb,

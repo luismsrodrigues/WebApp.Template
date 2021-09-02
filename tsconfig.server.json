@@ -24,8 +24,7 @@
         }
     },
     "exclude": [
-        "./src/client",
-        "./config"
+        "./src/client"
     ],
     "include": [
         "./src"

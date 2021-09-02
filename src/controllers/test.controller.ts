@@ -1,4 +1,4 @@
-import { Controller, Get } from '../utils/decorators';
+import { Controller, Get } from '@/utils/decorators';
 import { BaseController } from './base.controller';
 import { Request, Response, NextFunction } from "express";
 
