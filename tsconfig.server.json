@@ -1,27 +1,18 @@
 {
+    "extends": "./tsconfig.json",
     "compilerOptions": {
         "module": "commonjs",
-        "target": "es2019",
-        "baseUrl": ".",
-        "moduleResolution": "node",
         "esModuleInterop": true,
         "downlevelIteration": true,
-        "allowSyntheticDefaultImports": true,
         "importHelpers": true,
-        "skipLibCheck": true,
         "sourceMap": true,
-        "removeComments": true,
         "noEmitOnError": true,
         "strict": false,
         "alwaysStrict": false,
         "noImplicitAny": false,
-        "experimentalDecorators": true,
         "typeRoots": [
             "node_modules/@types/"
-        ],
-        "paths": { 
-            "@/utils/*": ["./src/utils/*"], 
-        }
+        ]
     },
     "exclude": [
         "./src/client"

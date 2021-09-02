@@ -15,7 +15,10 @@ module.exports = {
         rules: [
             {
                 test: /\.tsx?$/,
-                loader: 'ts-loader'
+                loader: 'ts-loader',
+                options: {
+                    configFile: "tsconfig.client.json"
+                }
             },
             {
                 test: /\.js$/,
@@ -29,7 +32,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template:path.resolve(basePath, 'src/client/static/index.html'),
+            template: path.resolve(basePath, 'src/client/static/index.html'),
             favicon: path.resolve(basePath, 'src/client/static/favicon.ico'),
             title: "Tac Template",
             description: "Tac Template"
@@ -50,7 +53,9 @@ module.exports = {
     resolve: {
         extensions: ['.ts', '.tsx', '.js'],
         plugins: [
-            new TsconfigPathsPlugin()
+            new TsconfigPathsPlugin({
+                configFile: "./tsconfig.client.json"
+            })
         ]
     },
     devServer: {
