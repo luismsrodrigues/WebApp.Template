@@ -1,3 +1,3 @@
-export * from "./controller.decorater";
-export * from "./http.verb.decorater";
-export * from "./authentication.decorater";
+export * from "./controller.decorator";
+export * from "./http.verb.decorator";
+export * from "./authentication.decorator";

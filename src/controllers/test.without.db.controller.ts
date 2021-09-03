@@ -1,14 +1,27 @@
-import { DatabaseContext } from '@/database/contex';
-import { BaseController, Controller, Get } from '@/lib';
-import { Request, Response } from "express";
+import { BaseController, Controller, Get, Post, RequestQuery, RequestParams, RequestBody } from '@/lib';
+
+export class RequestTest {
+    public test: string
+}
 
 @Controller('/out')
 export class TestWithoutDbController extends BaseController {
-    private _database = DatabaseContext.CommunityCsGoServers();
+
+    @Get("/123/:test")
+    public async TestParamOnRoute(Params: RequestParams<any>): Promise<any> {
+        return Params;
+    }
 
     @Get("/123")
-    public async TestMethod($: this, request: Request, response: Response): Promise<void> {
-        const result = await $._database.query("SELECT * FROM sotaos2 WHERE id = ?", [2]);
-        response.json({ ts: Date.now(), t: "out", result: result });
+    public async TestQueryString(Query: RequestQuery<any>): Promise<any> {
+        return Query;
+    }
+
+    @Post("/123")
+    public async PostTestBody(Body: RequestBody<RequestTest>): Promise<any> {
+        return {
+            instance: this,
+            Body
+        };
     }
 }

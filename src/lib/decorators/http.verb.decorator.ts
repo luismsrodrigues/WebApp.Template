@@ -15,7 +15,7 @@ export function Get(route: string) {
 
         target.Routes.push({
             Path: route,
-            Callback: propertyKey,
+            Callback: descriptor.value,
             Method: "GET"
         });
     };
@@ -30,7 +30,7 @@ export function Post(route: string) {
 
         target.Routes.push({
             Path: route,
-            Callback: propertyKey,
+            Callback: descriptor.value,
             Method: "POST"
         });
     };
@@ -45,7 +45,7 @@ export function Delete(route: string) {
 
         target.Routes.push({
             Path: route,
-            Callback: propertyKey,
+            Callback: descriptor.value,
             Method: "DELETE"
         });
     };
@@ -60,7 +60,7 @@ export function Put(route: string) {
 
         target.Routes.push({
             Path: route,
-            Callback: propertyKey,
+            Callback: descriptor.value,
             Method: "PUT"
         });
     };

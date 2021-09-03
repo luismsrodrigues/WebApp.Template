@@ -1,3 +1,6 @@
+/* eslint-disable no-shadow-restricted-names */
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Router, Application, Request, Response } from "express";
@@ -5,15 +8,10 @@ import { AuthorizeHandler } from "@/lib";
 
 type HttpVerb = "GET" | "POST" | "PUT" | "DELETE";
 
-export {
-    Request,
-    Response
-};
-
 export interface IRouter {
     Path: string,
     Method: HttpVerb,
-    Callback: string
+    Callback: any
 }
 
 export abstract class BaseController {
@@ -31,28 +29,28 @@ export abstract class BaseController {
                         router.Path,
                         this.ApplyMiddleware(router.Callback),
                         // @ts-ignore
-                        async (request, response, next) => await this.ErrorHandler(router, request, response, next));
+                        async (request, response, next) => await this.MethodHandler(router, request, response, next));
                     break;
                 case "POST":
                     _router.post(
                         router.Path,
                         this.ApplyMiddleware(router.Callback),
                         // @ts-ignore
-                        async (request, response, next) => await this.ErrorHandler(router, request, response, next));
+                        async (request, response, next) => await this.MethodHandler(router, request, response, next));
                     break;
                 case "PUT":
                     _router.put(
                         router.Path,
                         this.ApplyMiddleware(router.Callback),
                         // @ts-ignore
-                        async (request, response, next) => await this.ErrorHandler(router, request, response, next));
+                        async (request, response, next) => await this.MethodHandler(router, request, response, next));
                     break;
                 case "DELETE":
                     _router.delete(
                         router.Path,
                         this.ApplyMiddleware(router.Callback),
                         // @ts-ignore
-                        async (request, response, next) => await this.ErrorHandler(router, request, response, next));
+                        async (request, response, next) => await this.MethodHandler(router, request, response, next));
                     break;
             }
         });
@@ -60,9 +58,24 @@ export abstract class BaseController {
         app.use(this.BasePath, _router);
     }
 
-    private async ErrorHandler(router: IRouter, request, response, next) {
+    private async MethodHandler(router: IRouter, request: Request, response: Response, next) {
         try {
-            await this[router.Callback](this, request, response, next);
+            const method: Function = router.Callback.bind(this);
+
+            const result = await method(
+                request.query,
+                request.params,
+                request.body
+            );
+
+            response.status(200);
+
+            if (result != null) {
+                response.json({
+                    result
+                });
+            }
+            response.end();
         } catch (error) {
             next(error);
         }

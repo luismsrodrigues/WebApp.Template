@@ -1,6 +1,7 @@
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
   entry: './src/main.ts',
@@ -40,5 +41,6 @@ module.exports = {
         { from: 'ormconfig.json', to: './' }
       ]
     })
-  ]
+  ],
+  externals: [nodeExternals()]
 };
