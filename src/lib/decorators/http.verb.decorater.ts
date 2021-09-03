@@ -1,4 +1,4 @@
-import { BaseController } from "@/lib";
+import { BaseController } from "@/lib/base.controller";
 
 function ValidateRoute(route: string) {
     if (!route.startsWith("/")) {

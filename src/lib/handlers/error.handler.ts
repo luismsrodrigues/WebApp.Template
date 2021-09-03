@@ -3,6 +3,8 @@ import { ValidationError, LogicError, UnauthorizedError } from '@/lib/entities';
 
 export function ErrorHandler(error: Error, request: Request, response: Response, next: NextFunction) {
 
+    console.log(error);
+
     if (error instanceof ValidationError) {
         response.status(error.HTTP_STATUS_CODE).json({
             Title: error.message,

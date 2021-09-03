@@ -1,13 +1,20 @@
-import { BaseController, Controller, Get, Authorize } from '@/lib';
-import { ValidationError } from '@/lib/entities';
+import { BaseController, Controller, Get, Authorize, ValidationError } from '@/lib';
 import { Request, Response } from "express";
+import { DatabaseContext } from "@/database/contex";
 
 @Controller('/test')
 export class TestController extends BaseController {
+  private _database = DatabaseContext.CommunityCsGoServers();
 
   @Get("/123")
   public TestMethod($: this, request: Request, response: Response): void {
-    response.json({ Test: 111, ts: Date.now() });
+    response.json({ Test: 222, ts: Date.now() });
+  }
+
+  @Get("/db")
+  public async DB($: this, request: Request, response: Response): Promise<void> {
+    const result = await $._database.query("SELECT * FROM sotaos WHERE id = ?", [2]);
+    response.json({ result: result });
   }
 
   @Get("/1")

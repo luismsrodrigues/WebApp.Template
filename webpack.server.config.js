@@ -35,7 +35,10 @@ module.exports = {
   },
   plugins: [
     new CopyPlugin({
-      patterns: [{ from: '.env.prod', to: './' }]
+      patterns: [
+        { from: '.env.prod', to: './' },
+        { from: 'ormconfig.json', to: './' }
+      ]
     })
   ]
 };
