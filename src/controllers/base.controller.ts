@@ -31,28 +31,28 @@ export abstract class BaseController {
                         router.Path,
                         this.ApplyMiddleware(router.Callback),
                         // @ts-ignore
-                        (request, response, next) => this.ErrorHandler(router, request, response, next));
+                        async (request, response, next) => await this.ErrorHandler(router, request, response, next));
                     break;
                 case "POST":
                     _router.post(
                         router.Path,
                         this.ApplyMiddleware(router.Callback),
                         // @ts-ignore
-                        (request, response, next) => this.ErrorHandler(router, request, response, next));
+                        async (request, response, next) => await this.ErrorHandler(router, request, response, next));
                     break;
                 case "PUT":
                     _router.put(
                         router.Path,
                         this.ApplyMiddleware(router.Callback),
                         // @ts-ignore
-                        (request, response, next) => this.ErrorHandler(router, request, response, next));
+                        async (request, response, next) => await this.ErrorHandler(router, request, response, next));
                     break;
                 case "DELETE":
                     _router.delete(
                         router.Path,
                         this.ApplyMiddleware(router.Callback),
                         // @ts-ignore
-                        (request, response, next) => this.ErrorHandler(router, request, response, next));
+                        async (request, response, next) => await this.ErrorHandler(router, request, response, next));
                     break;
             }
         });

@@ -1,7 +1,7 @@
 import { Response, Request, NextFunction } from "express";
+import { UnauthorizedError } from '@/entities';
 
-export function AuthorizeHandler( request: Request, response: Response, next: NextFunction){
-    response.status(401).json({
-        error: new Error('Invalid request!')
-    });
+//TODO : ADD LOGIC FOR VALIDATION OF USER 
+export function AuthorizeHandler(request: Request, response: Response, next: NextFunction) {
+    throw new UnauthorizedError("Unauthorized");
 }

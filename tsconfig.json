@@ -11,6 +11,12 @@
       "@/utils/*": [
         "./src/utils/*"
       ],
+      "@/entities/*": [
+        "./src/entities/*"
+      ],
+      "@/entities": [
+        "./src/entities"
+      ],
     }
   },
   "exclude": [

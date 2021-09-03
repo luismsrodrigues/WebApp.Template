@@ -1,6 +1,7 @@
 import { Controller, Get, Authorize } from '@/utils/decorators';
-import { BaseController } from './base.controller';
+import { ValidationError } from '@/entities';
 import { Request, Response } from "express";
+import { BaseController } from './base.controller';
 
 @Controller('/test')
 export class TestController extends BaseController {
@@ -18,7 +19,9 @@ export class TestController extends BaseController {
 
   @Get("/2")
   public Method2($: this, request: Request, response: Response, next): void {
-    throw new Error("Aconteceu alguma coisa nesta altura e isto arrebentou!");
-    response.json({ Test: $.BasePath, ts: Date.now() });
+    throw new ValidationError("Este código não é válido.").AddValue({
+      field: "Username",
+      message: "Campo obrigatório"
+    });
   }
 }
