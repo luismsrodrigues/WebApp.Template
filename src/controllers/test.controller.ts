@@ -1,7 +1,6 @@
-import { Controller, Get, Authorize } from '@/utils/decorators';
-import { ValidationError } from '@/entities';
+import { BaseController, Controller, Get, Authorize } from '@/lib';
+import { ValidationError } from '@/lib/entities';
 import { Request, Response } from "express";
-import { BaseController } from './base.controller';
 
 @Controller('/test')
 export class TestController extends BaseController {

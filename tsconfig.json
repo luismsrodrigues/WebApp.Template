@@ -8,14 +8,11 @@
     "removeComments": true,
     "experimentalDecorators": true,
     "paths": {
-      "@/utils/*": [
-        "./src/utils/*"
+      "@/lib/*": [
+        "./src/lib/*"
       ],
-      "@/entities/*": [
-        "./src/entities/*"
-      ],
-      "@/entities": [
-        "./src/entities"
+      "@/lib": [
+        "./src/lib"
       ],
     }
   },

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Router, Application, Request, Response } from "express";
-import { AuthorizeHandler } from "@/utils/handlers";
+import { AuthorizeHandler } from "@/lib";
 
 type HttpVerb = "GET" | "POST" | "PUT" | "DELETE";
 

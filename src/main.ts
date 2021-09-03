@@ -3,7 +3,7 @@ import express from "express";
 import path from 'path';
 import dotenv from "dotenv";
 import Controllers from "./controllers";
-import { ErrorHandler } from "@/utils/handlers";
+import { ErrorHandler } from "@/lib/handlers";
 
 dotenv.config();
 

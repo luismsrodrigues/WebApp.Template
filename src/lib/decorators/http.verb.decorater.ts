@@ -1,7 +1,7 @@
-import { BaseController } from "../../controllers/base.controller";
+import { BaseController } from "@/lib";
 
 function ValidateRoute(route: string) {
-    if(!route.startsWith("/")){
+    if (!route.startsWith("/")) {
         throw new Error("Invalid route - " + route + " - because route need start with /.");
     }
 }
@@ -9,7 +9,7 @@ function ValidateRoute(route: string) {
 export function Get(route: string) {
     return function (target: BaseController, propertyKey: string, descriptor: PropertyDescriptor) {
         ValidateRoute(route);
-        if(!target.Routes){
+        if (!target.Routes) {
             target.Routes = [];
         }
 
@@ -24,7 +24,7 @@ export function Get(route: string) {
 export function Post(route: string) {
     return function (target: BaseController, propertyKey: string, descriptor: PropertyDescriptor) {
         ValidateRoute(route);
-        if(!target.Routes){
+        if (!target.Routes) {
             target.Routes = [];
         }
 
@@ -39,7 +39,7 @@ export function Post(route: string) {
 export function Delete(route: string) {
     return function (target: BaseController, propertyKey: string, descriptor: PropertyDescriptor) {
         ValidateRoute(route);
-        if(!target.Routes){
+        if (!target.Routes) {
             target.Routes = [];
         }
 
@@ -54,7 +54,7 @@ export function Delete(route: string) {
 export function Put(route: string) {
     return function (target: BaseController, propertyKey: string, descriptor: PropertyDescriptor) {
         ValidateRoute(route);
-        if(!target.Routes){
+        if (!target.Routes) {
             target.Routes = [];
         }
 

@@ -1,5 +1,5 @@
 import { Response, Request, NextFunction } from "express";
-import { ValidationError, LogicError, UnauthorizedError } from '@/entities';
+import { ValidationError, LogicError, UnauthorizedError } from '@/lib/entities';
 
 export function ErrorHandler(error: Error, request: Request, response: Response, next: NextFunction) {
 

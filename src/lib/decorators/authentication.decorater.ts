@@ -1,4 +1,4 @@
-import { BaseController } from "../../controllers/base.controller";
+import { BaseController } from "@/lib";
 
 export function Authorize() {
     return function (target: BaseController, propertyKey: string, descriptor: PropertyDescriptor) {
