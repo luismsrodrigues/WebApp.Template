@@ -5,7 +5,7 @@ import path from 'path';
 import dotenv from "dotenv";
 import Controllers from "./controllers";
 import { ErrorHandler } from "@/lib/handlers";
-import { DatabaseConfig } from '@/database/config';
+import { ConfigDatabase } from "@/lib/database";
 
 dotenv.config();
 
@@ -15,10 +15,12 @@ const isProduction: boolean = process.env.ENV != "development";
 
 const app: Application = express();
 
-DatabaseConfig(() => {
-  app.use(express.json());
-  app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
+ConfigDatabase.Config([ConfigDatabase.AddConnection("test")], Mount);
+
+function Mount() {
   Controllers.forEach(controller => {
     const t = new controller;
     t.Map(app);
@@ -49,6 +51,6 @@ DatabaseConfig(() => {
     const mode = isProduction ? "Production" : "Development";
     console.log("Started in " + mode + " Mode");
   });
-});
+}
 
 module.exports = app;
