@@ -11,6 +11,7 @@ export class ConfigDatabase {
         return getConnectionOptions(connectionName).then(connectionOptions => {
             createConnection({
                 logger: "simple-console",
+                logging: true,
                 ...connectionOptions
             });
         });
