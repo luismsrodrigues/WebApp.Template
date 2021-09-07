@@ -70,10 +70,10 @@ export abstract class BaseController {
         try {
             const method: Function = router.Callback.bind(this);
             const dependencyInjectionArguments = [];
-            const dependencyInjectionArgumentMappeds = this.RouterArgumentInjection.filter(e => e.MethodName == router.Callback.name)
-                .sort((a, b) => a.Index - b.Index);
+            const dependencyInjectionArgumentMappeds = this.RouterArgumentInjection?.filter(e => e.MethodName == router.Callback.name)
+                ?.sort((a, b) => a.Index - b.Index);
 
-            if (dependencyInjectionArgumentMappeds.length > 0) {
+            if (dependencyInjectionArgumentMappeds?.length > 0) {
                 dependencyInjectionArgumentMappeds.forEach(element => {
                     switch (element.Type) {
                         case "BODY":
