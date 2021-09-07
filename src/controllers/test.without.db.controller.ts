@@ -1,27 +1,33 @@
-import { BaseController, Controller, Get, Post, RequestQuery, RequestParams, RequestBody } from '@/lib';
+import { BaseController, Controller, Get, Post, RequestBody, RequestParams, RequestQuery } from '@/lib';
 
-export class RequestTest {
+class RequestTest {
     public test: string
+}
+
+class RequestQueryTest {
+    public testQuery: string
 }
 
 @Controller('/out')
 export class TestWithoutDbController extends BaseController {
+    private t = "test";
 
     @Get("/123/:test")
-    public async TestParamOnRoute(Params: RequestParams<any>): Promise<any> {
+    async TestParamOnRoute(@RequestParams Params: any): Promise<any> {
         return Params;
     }
 
     @Get("/123")
-    public async TestQueryString(Query: RequestQuery<any>): Promise<any> {
+    async TestQueryString(@RequestQuery Query: any): Promise<any> {
         return Query;
     }
 
     @Post("/123")
-    public async PostTestBody(Body: RequestBody<RequestTest>): Promise<any> {
+    async PostTestBody(@RequestBody Body: RequestTest, @RequestQuery Query: RequestQueryTest): Promise<any> {
         return {
             instance: this,
-            Body
+            Body,
+            Query
         };
     }
 }

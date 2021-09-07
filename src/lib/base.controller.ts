@@ -14,10 +14,18 @@ export interface IRouter {
     Callback: any
 }
 
+export type RouterArgumentType = "BODY" | "QUERY" | "PARAMS";
+export interface IRouterArguments {
+    MethodName: string,
+    Type: RouterArgumentType,
+    Index: number
+}
+
 export abstract class BaseController {
     public BasePath: string;
     public Routes: IRouter[];
     public AuthorizedMethods: string[];
+    public RouterArgumentInjection: IRouterArguments[];
 
     public Map(app: Application): void {
         const _router = Router();
@@ -61,12 +69,32 @@ export abstract class BaseController {
     private async MethodHandler(router: IRouter, request: Request, response: Response, next) {
         try {
             const method: Function = router.Callback.bind(this);
+            const dependencyInjectionArguments = [];
+            const dependencyInjectionArgumentMappeds = this.RouterArgumentInjection.filter(e => e.MethodName == router.Callback.name)
+                .sort((a, b) => a.Index - b.Index);
 
-            const result = await method(
-                request.query,
-                request.params,
-                request.body
-            );
+            if (dependencyInjectionArgumentMappeds.length > 0) {
+                dependencyInjectionArgumentMappeds.forEach(element => {
+                    switch (element.Type) {
+                        case "BODY":
+                            dependencyInjectionArguments.push(request.body);
+                            break;
+
+                        case "QUERY":
+                            dependencyInjectionArguments.push(request.query);
+                            break;
+
+                        case "PARAMS":
+                            dependencyInjectionArguments.push(request.params);
+                            break;
+
+                        default:
+                            throw new Error("No supported type.");
+                    }
+                });
+            }
+
+            const result = await method(...dependencyInjectionArguments);
 
             response.status(200);
 
