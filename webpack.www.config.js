@@ -10,14 +10,14 @@ const _apiPort = process.env.API_PORT || 3000;
 const _clientPort = process.env.CLIENT_PORT || 3001;
 
 module.exports = {
-    entry: path.resolve(basePath, "src/client/index.tsx"),
+    entry: path.resolve(basePath, "src/www/index.tsx"),
     module: {
         rules: [
             {
                 test: /\.tsx?$/,
                 loader: 'ts-loader',
                 options: {
-                    configFile: "tsconfig.client.json"
+                    configFile: "tsconfig.www.json"
                 }
             },
             {
@@ -32,15 +32,15 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: path.resolve(basePath, 'src/client/static/index.html'),
-            favicon: path.resolve(basePath, 'src/client/static/favicon.ico'),
+            template: path.resolve(basePath, 'src/www/static/index.html'),
+            favicon: path.resolve(basePath, 'src/www/static/favicon.ico'),
             title: "Tac Template",
             description: "Tac Template"
         }),
         new CopyPlugin({
             patterns: [
-                { from: path.resolve(basePath, 'src/client/static/robots.txt'), to: './' },
-                { from: path.resolve(basePath, 'src/client/static/manifest.json'), to: './' }
+                { from: path.resolve(basePath, 'src/www/static/robots.txt'), to: './' },
+                { from: path.resolve(basePath, 'src/www/static/manifest.json'), to: './' }
             ],
         })
     ],
@@ -54,14 +54,14 @@ module.exports = {
         extensions: ['.ts', '.tsx', '.js'],
         plugins: [
             new TsconfigPathsPlugin({
-                configFile: "./tsconfig.client.json"
+                configFile: "./tsconfig.www.json"
             })
         ]
     },
     devServer: {
         static: './build',
         compress: true,
-        watchFiles: ['.src/client**'],
+        watchFiles: ['.src/www**'],
         hot: true,
         port: _clientPort,
         proxy: {

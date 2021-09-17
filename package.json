@@ -1,5 +1,5 @@
 {
-  "name": "tac.mvc.template",
+  "name": "WebApp.Template",
   "author": "luis.ms.rodrigues@hotmail.com",
   "version": "0.1.0",
   "private": true,
@@ -50,10 +50,10 @@
     "webpack-node-externals": "^3.0.0"
   },
   "scripts": {
-    "build:client": "webpack --mode production",
+    "build:client": "webpack --mode production --config ./webpack.www.config.js",
     "build:server": "webpack --mode production --config ./webpack.server.config.js",
     "build": "npm-run-all --parallel build:*",
-    "dev:client": "webpack serve --mode development --config ./webpack.config.js",
+    "dev:client": "webpack serve --mode development --config ./webpack.www.config.js",
     "dev:server": "nodemon",
     "dev": "npm-run-all --parallel dev:*"
   }

@@ -10,7 +10,6 @@
         "forceConsistentCasingInFileNames": true,
         "resolveJsonModule": true,
         "isolatedModules": true,
-        "jsx": "react",
         "noImplicitAny": true,
         "outDir": "build",
         "rootDir": "src",
@@ -21,7 +20,7 @@
         ]
     },
     "include": [
-        "./src/client"
+        "./src/www"
     ],
     "exclude": [
         "./node_modules/**/*"

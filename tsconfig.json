@@ -6,6 +6,7 @@
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "removeComments": true,
+    "jsx": "react",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "paths": {
@@ -20,9 +21,6 @@
       ],
     }
   },
-  "exclude": [
-    "./src/client"
-  ],
   "include": [
     "./src"
   ]
